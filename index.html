@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.className='js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학원 영상강의 제작 서비스</title>
+<meta name="description" content="강의 다시보기 서비스는 강사 개인만의 특별한 경쟁력 그리고 포트폴리오가 됩니다.">
+
+<!-- 시안 검토용으로 올린 페이지입니다.
+     GitHub Pages 는 무료 계정에서 항상 공개라 주소를 아는 사람은 누구나 볼 수 있습니다.
+     최소한 검색 결과에는 안 뜨도록 막아둡니다. (robots.txt 도 같이 있습니다)
+     정식 공개할 때 이 줄과 robots.txt 를 지우면 됩니다. -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- 링크를 카카오톡·메신저로 보냈을 때 뜨는 미리보기.
+     og:image 는 전체 주소여야 제대로 뜹니다. 배포 주소가 정해지면 아래를
+     https://<아이디>.github.io/<저장소이름>/img/lecture-cell.jpg 로 바꿔주세요. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="학원 영상강의 제작 서비스">
+<meta property="og:description" content="강의 다시보기 서비스는 강사 개인만의 특별한 경쟁력 그리고 포트폴리오가 됩니다.">
+<meta property="og:image" content="img/lecture-cell.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&display=swap">
+
+<style>
+/* =========================================================
+   학원 영상강의 제작 서비스 — 제안 포트폴리오
+
+   원본 PDF 7장을 웹으로 옮겼다. 매체가 바뀌면서 번역한 것:
+     · 고정 7장 → 스크롤 1장 + 상단 앵커 (읽는 사람이 원하는 데로 건너뛴다)
+     · 질문만 나열된 Q&A → 아코디언 (답을 접어두면 8개가 한눈에 들어온다)
+     · 가격 카드 6개 → 기본/추가를 나누고 합계를 명시 (제안서는 총액이 안 보이면 못 읽는다)
+     · 없던 최종 CTA 추가 (제안서는 "그래서 뭘 하면 되나"로 끝나야 한다)
+
+   원본의 시그니처는 '이중 라운드 프레임'이다.
+   표지 · PROJECT · 효과 세 장에 반복해서 나온다. 그걸 그대로 살렸다.
+   ========================================================= */
+
+:root{
+  /* --- 색: 무채색 + 유채색 2개(빨강·형광노랑). 원본 그대로 --- */
+  --paper:#FFFFFF;
+  --paper-2:#F5F6F7;          /* 섹션 구분용 아주 연한 판 */
+  --ink:#0B0B0C;              /* 흰 바탕 대비 19.9 */
+  --ink-2:#5E6066;            /* 흰 바탕 대비  6.4 */
+  /* #8B8E95 로 잡았다가 되돌렸다. 흰 바탕 대비 3.28 로,
+     가격 단서("강의 영상은 수정 불가능")와 푸터 면책 문구가 기준 미달이었다.
+     둘 다 실제로 읽혀야 하는 글이라 연한 판(#F5F6F7) 위에서도 통과하는 값으로 내렸다. */
+  --ink-3:#6B6F76;            /* 흰 바탕 5.05 · 연한 판 4.62 */
+  --line:#E3E4E7;
+  --line-2:#C4C6CB;
+  --red:#D01C2B;              /* 원본 3장의 #신뢰/#효율/#성과 pill */
+  --red-d:#A2121E;
+  --hl:#FFE94D;               /* 형광펜 */
+
+  /* --- 입체감: 밀착 + 주변광 2겹. 순검정 대신 살짝 차가운 잉크 --- */
+  --sh-sm:0 1px 3px rgba(11,12,20,.06), 0 5px 14px rgba(11,12,20,.06);
+  --sh-md:0 4px 10px rgba(11,12,20,.07), 0 18px 38px rgba(11,12,20,.10);
+  --sh-lg:0 10px 22px rgba(11,12,20,.10), 0 34px 70px rgba(11,12,20,.15);
+  --sh-red:0 6px 18px rgba(208,28,43,.28);
+
+  --r-lg:26px; --r-md:16px; --r-sm:10px; --r-pill:999px;
+
+  --e-out:cubic-bezier(.22,1,.36,1);
+  --e-out-soft:cubic-bezier(.16,1,.3,1);
+  --e-spring:cubic-bezier(.34,1.56,.64,1);
+  --d-fast:.16s; --d-mid:.32s; --d-slow:.6s;
+
+  --nav-h:60px;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 12px);}
+body{
+  font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,
+              'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  background:var(--paper); color:var(--ink);
+  line-height:1.65; letter-spacing:-.01em;
+  word-break:keep-all; overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+:focus-visible{outline:3px solid var(--red); outline-offset:3px; border-radius:4px;}
+
+.wrap{max-width:1120px; margin:0 auto; padding:0 clamp(18px,3.4vw,28px);}
+.sec{padding:clamp(62px,8.6vw,126px) 0;}
+.sec-tint{background:var(--paper-2);}
+.sec-dark{background:var(--ink); color:var(--paper);}
+
+/* 영문 표제 — 이 페이지에서 서체를 섞는 유일한 지점 */
+.en{
+  display:inline-block;
+  font-family:'Archivo','Pretendard Variable',sans-serif;
+  font-weight:900; letter-spacing:-.035em; line-height:.94;
+  font-size:clamp(44px,8.4vw,104px);
+}
+.en-sm{font-size:clamp(32px,5.2vw,62px);}
+
+/* 형광펜 — 원본처럼 글자 뒤를 통째로 채운다.
+   한글은 디센더가 없어서 얇은 바를 글자에 걸치면 받침을 먹는다. */
+.hl{
+  display:inline-block;
+  padding:.06em .22em; margin:0 -.06em;
+  background:var(--hl); color:var(--ink); font-weight:800;
+  border-radius:3px;
+}
+
+/* ---------- 시그니처: 이중 라운드 프레임 ---------- */
+.frame{
+  position:relative;
+  border:2.5px solid var(--ink); border-radius:var(--r-lg);
+  padding:clamp(26px,4.4vw,58px);
+  background:var(--paper);
+}
+.frame::before{
+  content:''; position:absolute; inset:9px;
+  border:1.5px solid var(--ink); border-radius:calc(var(--r-lg) - 8px);
+  pointer-events:none;
+}
+
+/* ---------- 네비 ---------- */
+.nav{
+  position:sticky; top:0; z-index:60; height:var(--nav-h);
+  background:rgba(255,255,255,.86); backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex; align-items:center; gap:clamp(12px,2vw,26px); height:100%;}
+.nav-mark{font-size:14.5px; font-weight:800; letter-spacing:-.02em; margin-right:auto; white-space:nowrap;}
+.nav-menu{display:flex; gap:clamp(12px,1.8vw,24px);}
+.nav-menu a{
+  font-size:13px; font-weight:600; color:var(--ink-2);
+  padding:4px 0; border-bottom:2px solid transparent;
+  transition:color var(--d-fast) ease, border-color var(--d-fast) ease;
+}
+.nav-menu a:hover{color:var(--ink); border-bottom-color:var(--ink);}
+.nav-cta{
+  background:var(--red); color:#fff; font-size:13px; font-weight:700;
+  padding:9px 18px; border-radius:var(--r-pill); white-space:nowrap;
+  box-shadow:var(--sh-red);
+  transition:transform var(--d-fast) var(--e-spring), background var(--d-fast) ease;
+}
+.nav-cta:hover{background:var(--red-d); transform:translateY(-1px);}
+.nav-cta:active{transform:translateY(1px) scale(.975);}
+@media (max-width:760px){ .nav-menu{display:none;} }
+
+/* ---------- 히어로 ---------- */
+.hero{padding:clamp(46px,7vw,96px) 0 clamp(52px,7vw,92px); text-align:center;}
+.hero .frame{max-width:820px; margin:0 auto; padding:clamp(38px,6vw,76px) clamp(24px,4vw,54px);}
+.hero h1{
+  font-size:clamp(38px,7.6vw,84px); font-weight:900;
+  letter-spacing:-.045em; line-height:1.12;
+}
+.ml{display:block; overflow:hidden; padding-bottom:.06em;}
+.ml > span{display:block;}
+
+.chips{display:flex; justify-content:center; flex-wrap:wrap; gap:9px; margin-top:clamp(20px,3vw,32px);}
+.chip{
+  font-size:clamp(13px,1.5vw,16px); font-weight:700;
+  padding:9px 20px; border-radius:var(--r-pill);
+  border:1.8px solid var(--ink); color:var(--ink); background:var(--paper);
+}
+.chip.on{background:var(--ink); color:var(--paper);}
+
+.hero-lead{
+  margin-top:clamp(26px,3.6vw,40px);
+  font-size:clamp(15px,1.85vw,21px); line-height:1.75; color:var(--ink-2);
+}
+.hero-lead b{color:var(--ink); font-weight:800;}
+.hero-btns{display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:clamp(24px,3.4vw,38px);}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-size:15px; font-weight:700; padding:15px 30px; border-radius:var(--r-pill);
+  border:2px solid transparent; cursor:pointer;
+  transition:transform var(--d-fast) var(--e-spring), background var(--d-fast) ease,
+             box-shadow var(--d-fast) ease, color var(--d-fast) ease;
+}
+.btn-primary{background:var(--red); color:#fff; box-shadow:var(--sh-red);}
+.btn-primary:hover{background:var(--red-d);}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
+.btn-ghost:hover{background:var(--ink); color:var(--paper);}
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:translateY(1px) scale(.975);}
+.sec-dark .btn-ghost{color:var(--paper); border-color:var(--paper);}
+.sec-dark .btn-ghost:hover{background:var(--paper); color:var(--ink);}
+
+/* ---------- 공통: 섹션 머리 ---------- */
+.sec-head{text-align:center; margin-bottom:clamp(34px,5vw,66px);}
+.sec-head .sub{
+  margin-top:14px; font-size:clamp(15px,1.75vw,20px); line-height:1.7; color:var(--ink-2);
+}
+.sec-dark .sec-head .sub{color:#B9BCC2;}
+
+/* ---------- 이미지 슬롯 ---------- */
+.slot{
+  position:relative; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:7px; text-align:center;
+  aspect-ratio:var(--ar,16/9);
+  padding:18px; border-radius:var(--r-sm);
+  border:2px dashed var(--line-2); background:var(--paper-2);
+}
+/* 사진이 채워진 자리. 슬롯과 같은 틀·같은 비율이라 사진을 넣고 빼도 레이아웃이 안 흔들린다 */
+.media{
+  position:relative; overflow:hidden; border-radius:var(--r-md);
+  aspect-ratio:var(--ar,16/9); background:var(--paper-2);
+}
+.media img{width:100%; height:100%; object-fit:cover; display:block;}
+/* 세로로 긴 스크린샷을 가로 틀에 넣을 때. 가운데를 잡으면 여백만 나온다 */
+.media img.pc-tall{object-position:center 40%;}
+
+.slot-l{font-size:12.5px; font-weight:800; color:var(--ink-2); letter-spacing:.02em;}
+.slot-s{font-size:11.5px; line-height:1.55; color:var(--ink-3);}
+.sec-dark .slot{background:#17181B; border-color:#3A3C42;}
+/* 어두운 판 위 슬롯 설명. #71757C 는 대비 3.84 로 미달이라 올렸다 */
+.sec-dark .slot-l{color:#9DA1A8;} .sec-dark .slot-s{color:#868A91;}
+/* 사진 위에 흰 글자가 올라가는 슬롯은 스크림을 미리 깔아둔다.
+   위에서 아래로 균등하게 어둡게 하면(0.10 → 0.55) 글자가 시작되는
+   62% 지점이 아직 밝아서 흰 글자가 4.2 밖에 안 나온다.
+   그래서 위 30%는 거의 비워두고 아래쪽에 몰아 세운다 —
+   사진은 살리면서 글자 자리만 확실히 어둡게. 밝은 사진이 들어와도 버틴다. */
+.slot-scrim::after{
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(11,12,20,0)   0%,
+    rgba(11,12,20,.10) 30%,
+    rgba(11,12,20,.70) 62%,
+    rgba(11,12,20,.88) 100%);
+}
+
+/* ---------- PROJECT ---------- */
+.pj-bracket{
+  max-width:760px; margin:0 auto; text-align:center;
+  border:2.5px solid var(--ink); border-bottom:none;
+  border-radius:var(--r-lg) var(--r-lg) 0 0;
+  padding:clamp(30px,4.6vw,58px) clamp(22px,4vw,50px) clamp(40px,5.4vw,66px);
+  position:relative;
+}
+.pj-bracket::before{
+  content:''; position:absolute; inset:9px 9px 0 9px;
+  border:1.5px solid var(--ink); border-bottom:none;
+  border-radius:calc(var(--r-lg) - 8px) calc(var(--r-lg) - 8px) 0 0;
+  pointer-events:none;
+}
+.pj-lines{font-size:clamp(15px,2vw,23px); font-weight:700; line-height:2; margin-top:12px;}
+
+.pj-band{position:relative; padding:clamp(30px,4.6vw,58px) 0;}
+/* 100vw 를 쓰면 안 된다 — 세로 스크롤바 폭까지 포함해서
+   화면보다 7px 넓어지고 가로 스크롤이 생긴다.
+   .pj-band 는 이미 페이지 전체 폭이라 left/right:0 이면 정확히 맞는다. */
+.pj-band::before{
+  content:''; position:absolute; left:0; right:0;
+  top:38%; bottom:12%; background:#2B2D33; z-index:0;
+}
+.pj-grid{
+  position:relative; z-index:1;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2vw,26px);
+}
+/* 처음엔 단원명 라벨바를 HTML로 다시 만들었다가 걷어냈다.
+   받은 캡처에 이미 그 바가 영상에 박혀 있어서 두 겹으로 겹쳤다.
+   화면에 찍힌 글자를 내가 다시 그릴 이유가 없다 — 사진 하나로 끝난다. */
+.vid{background:#000; border-radius:var(--r-sm); overflow:hidden; box-shadow:var(--sh-lg);}
+.vid img{width:100%; height:auto; display:block;}
+
+/* ---------- 효과 3카드 ---------- */
+.ef-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2vw,24px);}
+.ef-card{
+  background:linear-gradient(155deg,#FFFFFF 0%,#F7F8F9 100%);
+  border:1px solid var(--line); border-radius:var(--r-md);
+  box-shadow:var(--sh-md);
+  padding:clamp(24px,3.2vw,36px) clamp(16px,2.2vw,26px);
+  text-align:center; display:flex; flex-direction:column;
+}
+.ef-tag{
+  align-self:center; background:var(--red); color:#fff;
+  font-size:13px; font-weight:800; padding:6px 18px; border-radius:var(--r-pill);
+  box-shadow:var(--sh-red);
+}
+.ef-card h3{margin-top:16px; font-size:clamp(19px,2.3vw,26px); font-weight:800; letter-spacing:-.03em;}
+.ef-card p{margin-top:10px; font-size:clamp(13.5px,1.4vw,15.5px); line-height:1.7; color:var(--ink-2); flex:1;}
+.ef-arrow{margin:20px auto 16px; width:16px; height:31px; position:relative;}
+.ef-arrow::before{content:''; position:absolute; left:5px; top:0; width:6px; height:20px; background:var(--ink);}
+.ef-arrow::after{
+  content:''; position:absolute; left:0; bottom:0;
+  border-left:8px solid transparent; border-right:8px solid transparent;
+  border-top:11px solid var(--ink);
+}
+.ef-out{
+  border:2.5px solid var(--red); border-radius:var(--r-pill);
+  padding:12px 10px; font-size:clamp(15px,1.7vw,19px); font-weight:800; color:var(--ink);
+  background:var(--paper);
+}
+.ef-bar{
+  margin-top:clamp(18px,2.6vw,28px);
+  background:linear-gradient(160deg,#232429 0%,#0B0B0C 100%);
+  color:var(--paper); border-radius:var(--r-md);
+  padding:clamp(20px,3vw,30px) 16px; text-align:center;
+  font-size:clamp(20px,3.4vw,40px); font-weight:900; letter-spacing:-.035em;
+  box-shadow:var(--sh-lg);
+}
+
+/* ---------- PREVIEW ---------- */
+.pv-head{position:relative; text-align:center; margin-bottom:clamp(32px,4.6vw,58px);}
+.pv-ghost{
+  position:absolute; left:50%; top:44%; transform:translate(-50%,-50%);
+  font-family:'Archivo',sans-serif; font-weight:900; letter-spacing:-.04em;
+  /* 'PREVIEW' 7글자는 Archivo 900 에서 대략 4.8em 폭이다.
+     15vw 로 두면 320px 화면에서 하한(74px)이 걸려 356px 로 삐져나가
+     페이지 전체에 가로 스크롤이 생겼다. 화면 폭에 비례시켜야 안 넘친다. */
+  font-size:min(19vw,190px); color:rgba(11,12,20,.055);
+  white-space:nowrap; pointer-events:none; z-index:0; user-select:none;
+}
+.pv-head > *:not(.pv-ghost){position:relative; z-index:1;}
+/* 원본 4쪽의 콜라주 구조 그대로.
+   왼쪽에 폴더 목록과 릴스를 쌓고, 오른쪽에 세로로 긴 단톡방을 통으로 세운다.
+   세 장의 비율이 1:1 · 3:4 · 1:2.1 로 제각각이라 한 줄로 늘어놓으면
+   가장 긴 것에 맞춰 나머지 아래가 텅 빈다. */
+.pv-grid{
+  display:grid;
+  /* 1.342 는 눈대중이 아니라 역산한 값이다.
+     폴더 824×844(1.024) 와 단톡방 640×880(1.375) 의 높이가 같아지려면
+     폭의 비가 1.375 / 1.024 = 1.342 여야 한다. 그래야 캡션 두 줄이 나란히 선다. */
+  grid-template-columns:minmax(0,1.342fr) minmax(0,1fr);
+  gap:clamp(16px,2.4vw,30px);
+}
+/* 폴더 목록(1:1.02)과 단톡방(1:1.375)을 나란히 세운다.
+   단톡방 원본은 1:2.11 이라 그대로 넣으면 cover 가 세로에 맞추느라
+   폭을 275px 깎아 배너 글자가 잘렸다. 그래서 이미지 자체를 잘랐다 —
+   레이아웃을 비트는 것보다 사진을 맞추는 쪽이 맞다. */
+/* 행까지 못 박는다. 열만 지정하면 자동 배치 커서가 릴스(1/-1)를 지나
+   단톡방을 3행으로 밀어버린다 — 실제로 그렇게 됐었다. */
+.pv-a{grid-column:1; grid-row:1;}
+.pv-c{grid-column:2; grid-row:1;}
+.pv-b{grid-column:1 / -1; grid-row:2;}   /* 릴스는 아래 한 줄을 통째로 */
+
+.pv-item{margin:0;}
+.pv-item .media{box-shadow:var(--sh-sm);}
+.reels{display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(8px,1.1vw,14px);}
+.reels .media{border-radius:var(--r-sm); box-shadow:var(--sh-sm);}
+.pv-cap{margin-top:14px; text-align:center; font-size:clamp(14px,1.5vw,17px); font-weight:800;}
+
+.how{margin-top:0;}
+.how-body{max-width:620px; margin:0 auto; text-align:center;}
+.how-body p{font-size:clamp(14.5px,1.6vw,17.5px); line-height:1.95; color:#C2C5CB;}
+.how-body p + p{margin-top:clamp(18px,2.4vw,26px);}
+.how-body b{color:var(--paper); font-weight:800;}
+
+/* ---------- PROCESS ---------- */
+.pc-list{max-width:760px; margin:0 auto; display:flex; flex-direction:column;}
+.pc-step{position:relative;}
+.pc-step .slot{border-radius:var(--r-md); overflow:hidden;}
+.pc-cap{
+  position:absolute; inset:auto 0 0 0; z-index:2;
+  padding:clamp(16px,2.4vw,26px) clamp(16px,2.6vw,28px); text-align:center; color:#fff;
+}
+.pc-n{
+  display:inline-block; font-family:'Archivo',sans-serif; font-weight:900;
+  font-size:12px; letter-spacing:.1em; color:#fff;
+  border:1.5px solid rgba(255,255,255,.65); border-radius:var(--r-pill);
+  padding:3px 11px; margin-bottom:9px;
+}
+.pc-t{font-size:clamp(17px,2.2vw,25px); font-weight:800; letter-spacing:-.03em;
+  text-shadow:0 2px 12px rgba(0,0,0,.55);}
+.pc-d{margin-top:7px; font-size:clamp(12.5px,1.35vw,15px); line-height:1.6; color:#EDEFF1;
+  text-shadow:0 1px 8px rgba(0,0,0,.55);}
+.pc-d b{color:var(--hl); font-weight:800;}
+/* 단계 사이 아래 방향 꺾쇠 */
+.pc-join{height:clamp(26px,3.4vw,42px); position:relative;}
+.pc-join::after{
+  content:''; position:absolute; left:50%; top:50%;
+  width:15px; height:15px; margin:-10px 0 0 -8px;
+  border-right:3px solid var(--line-2); border-bottom:3px solid var(--line-2);
+  transform:rotate(45deg);
+}
+.pc-foot{
+  margin:clamp(26px,3.6vw,42px) auto 0; max-width:760px;
+  background:var(--ink); color:var(--paper); border-radius:var(--r-md);
+  padding:clamp(16px,2.2vw,24px); text-align:center;
+  font-size:clamp(14.5px,1.7vw,19px); font-weight:800; letter-spacing:-.02em;
+  box-shadow:var(--sh-md);
+}
+
+/* ---------- PRICING ---------- */
+.pr-block{border:2px solid var(--ink); border-radius:var(--r-md); padding:clamp(20px,2.8vw,32px); position:relative;}
+.pr-label{
+  position:absolute; top:-16px; left:clamp(18px,2.6vw,30px);
+  background:var(--ink); color:var(--paper);
+  font-size:14px; font-weight:800; padding:7px 20px; border-radius:var(--r-sm);
+}
+.pr-note{
+  margin:6px 0 clamp(20px,2.6vw,28px); padding-left:clamp(96px,13vw,150px);
+  font-size:13.5px; line-height:1.6; color:var(--ink-2);
+}
+.pr-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.8vw,22px);}
+.pr-card{
+  background:linear-gradient(155deg,#FFFFFF 0%,#F6F7F8 100%);
+  border:1px solid var(--line); border-radius:var(--r-md);
+  box-shadow:var(--sh-sm); padding:clamp(22px,3vw,32px) 14px; text-align:center;
+  transition:transform .22s var(--e-out), box-shadow .22s var(--e-out);
+}
+.pr-card:hover{transform:translateY(-5px); box-shadow:var(--sh-lg);}
+.pr-k{font-size:clamp(14px,1.5vw,17px); font-weight:600; color:var(--ink-2); letter-spacing:.04em;}
+.pr-v{margin-top:clamp(14px,2vw,24px); font-size:clamp(24px,3.4vw,38px); font-weight:900; letter-spacing:-.035em;}
+.pr-x{margin-top:9px; font-size:12.5px; line-height:1.55; color:var(--ink-3);}
+.pr-sum{
+  margin-top:clamp(18px,2.4vw,26px); padding-top:clamp(16px,2.2vw,22px);
+  border-top:2px dashed var(--line-2);
+  display:flex; align-items:baseline; justify-content:flex-end; gap:14px; flex-wrap:wrap;
+}
+.pr-sum-k{font-size:clamp(14px,1.6vw,17px); font-weight:700; color:var(--ink-2);}
+.pr-sum-v{font-size:clamp(26px,4vw,44px); font-weight:900; letter-spacing:-.04em;}
+.pr-extra{margin-top:clamp(26px,3.6vw,44px);}
+.pr-extra-h{font-size:14px; font-weight:800; color:var(--ink-2); margin-bottom:14px; letter-spacing:.02em;}
+
+/* ---------- Q&A ---------- */
+.qa-list{max-width:880px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
+.qa{
+  border:1.8px solid var(--ink); border-radius:var(--r-pill);
+  background:var(--paper); overflow:hidden;
+  transition:border-radius var(--d-mid) var(--e-out), box-shadow var(--d-mid) ease;
+}
+.qa.open{border-radius:var(--r-md); box-shadow:var(--sh-md);}
+.qa-q{
+  width:100%; display:flex; align-items:center; gap:14px; text-align:left;
+  background:none; border:0; cursor:pointer; font:inherit; color:inherit;
+  padding:clamp(17px,2.2vw,24px) clamp(20px,2.8vw,32px);
+}
+.qa-mark{font-weight:900; font-size:clamp(15px,1.7vw,18px); flex:none;}
+.qa-t{flex:1; font-size:clamp(14.5px,1.65vw,18px); font-weight:800; letter-spacing:-.02em;}
+.qa-ic{flex:none; width:18px; height:18px; position:relative;}
+.qa-ic::before,.qa-ic::after{
+  content:''; position:absolute; left:50%; top:50%; background:var(--ink);
+  transform:translate(-50%,-50%); transition:transform var(--d-mid) var(--e-out);
+}
+.qa-ic::before{width:16px; height:2.5px;}
+.qa-ic::after{width:2.5px; height:16px;}
+.qa.open .qa-ic::after{transform:translate(-50%,-50%) scaleY(0);}
+.qa-a{max-height:0; overflow:hidden; transition:max-height var(--d-mid) var(--e-out);}
+.qa-a-in{
+  padding:0 clamp(20px,2.8vw,32px) clamp(20px,2.6vw,28px) clamp(46px,5.4vw,64px);
+  font-size:clamp(14px,1.55vw,16.5px); line-height:1.8; color:var(--ink-2);
+}
+.ph{
+  display:block; border:1.5px dashed var(--line-2); border-radius:var(--r-sm);
+  background:var(--paper-2); color:var(--ink-3);
+  padding:13px 16px; font-size:13.5px; font-weight:600;
+}
+
+/* ---------- 최종 CTA ---------- */
+.cta-box{text-align:center;}
+.cta-box h2{font-size:clamp(26px,4.4vw,52px); font-weight:900; letter-spacing:-.04em; line-height:1.25;}
+.cta-box .sub{margin-top:16px; font-size:clamp(15px,1.8vw,19px); color:#B9BCC2; line-height:1.7;}
+.cta-lines{
+  margin:clamp(28px,3.6vw,42px) auto 0; max-width:520px;
+  display:grid; gap:10px; text-align:left;
+}
+.cta-line{
+  display:flex; align-items:center; gap:14px;
+  border:1.5px solid #34363C; border-radius:var(--r-md);
+  padding:15px 20px; background:#141519;
+}
+.cta-k{font-size:13px; font-weight:800; color:#9DA1A8; width:74px; flex:none;}
+.cta-v{font-size:15px; font-weight:700; color:var(--paper);}
+.cta-v.ph-inline{color:#82868E; font-weight:600;}
+
+/* ---------- 푸터 ---------- */
+.foot{padding:38px 0 44px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-3); line-height:1.8;}
+.foot b{color:var(--ink-2); font-weight:700;}
+
+/* ---------- 모바일 하단 고정 CTA ---------- */
+.dock{
+  position:fixed; left:0; right:0; bottom:0; z-index:70; display:none;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94); backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px); border-top:1px solid var(--line);
+}
+.dock .btn{width:100%; padding:15px;}
+@media (max-width:760px){
+  .dock{display:block;}
+  body{padding-bottom:80px;}
+}
+
+/* ---------- 스크롤 등장 ---------- */
+.js .rv{opacity:0; transform:translateY(22px);
+  transition:opacity var(--d-slow) var(--e-out), transform var(--d-slow) var(--e-out);}
+.js .rv.in{opacity:1; transform:none;}
+.js .hero h1 .ml > span{transform:translateY(105%);}
+.hero.reveal h1 .ml > span{animation:maskUp .78s var(--e-out-soft) forwards;}
+.hero.reveal h1 .ml:nth-of-type(2) > span{animation-delay:.1s;}
+@keyframes maskUp{to{transform:none;}}
+.js .hero .chips, .js .hero-lead, .js .hero-btns{opacity:0; transform:translateY(14px);}
+.hero.reveal .chips    {animation:fadeUp .7s var(--e-out) .5s forwards;}
+.hero.reveal .hero-lead{animation:fadeUp .7s var(--e-out) .62s forwards;}
+.hero.reveal .hero-btns{animation:fadeUp .7s var(--e-out) .72s forwards;}
+@keyframes fadeUp{to{opacity:1; transform:none;}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important; animation-delay:0s !important;
+    transition-duration:.01ms !important; transition-delay:0s !important;
+  }
+  html{scroll-behavior:auto;}
+  .js .rv{opacity:1; transform:none;}
+  .js .hero h1 .ml > span{transform:none;}
+  .js .hero .chips, .js .hero-lead, .js .hero-btns{opacity:1; transform:none;}
+}
+
+/* ---------- 좁은 화면 ---------- */
+@media (max-width:900px){
+  .ef-grid, .pr-grid{grid-template-columns:1fr 1fr;}
+  .ef-grid > :nth-child(3), .pr-grid > :nth-child(3){grid-column:1 / -1;}
+  .pr-note{padding-left:0;}
+
+  /* 두 칸을 유지하기엔 단톡방 폭이 너무 좁아진다. 위아래로 쌓는다.
+     릴스는 4장을 한 줄로 두면 한 칸이 80px 도 안 되므로 2×2 로 접는다. */
+  .pv-grid{grid-template-columns:1fr;}
+  .pv-a, .pv-b, .pv-c{grid-column:1; grid-row:auto;}
+  .pv-a .media, .pv-b, .pv-c .media{max-width:430px; margin-left:auto; margin-right:auto;}
+  .reels{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:620px){
+  .pj-grid{grid-template-columns:1fr; max-width:420px; margin:0 auto;}
+  .pj-band::before{top:0; bottom:0;}
+  .ef-grid, .pr-grid{grid-template-columns:1fr;}
+  .ef-grid > :nth-child(3), .pr-grid > :nth-child(3){grid-column:auto;}
+  .pr-label{position:static; display:inline-block; margin-bottom:12px;}
+  /* 좁은 화면에선 16:9 가 너무 납작하다.
+     STEP03 은 설명 두 줄이 늘어나면서 캡션이 사진 높이의 76% 를 덮어
+     정작 카메라가 안 보였다. 4:3 으로 세워 글자 위에 사진 자리를 만든다. */
+  .pc-step .media, .pc-step .slot{aspect-ratio:4/3;}
+
+  .qa-q{padding:16px 18px; gap:10px;}
+  .qa-a-in{padding-left:18px; padding-right:18px;}
+  .cta-line{flex-direction:column; align-items:flex-start; gap:5px;}
+  .cta-k{width:auto;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <span class="nav-mark">학원 영상강의 제작 서비스</span>
+    <div class="nav-menu">
+      <a href="#project">사례</a>
+      <a href="#effect">기대 효과</a>
+      <a href="#preview">활용</a>
+      <a href="#process">제작 과정</a>
+      <a href="#pricing">비용</a>
+      <a href="#qa">Q&amp;A</a>
+    </div>
+    <a href="#contact" class="nav-cta">문의하기</a>
+  </div>
+</nav>
+
+<!-- ============ 표지 ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="frame">
+      <h1>
+        <span class="ml"><span>학원 영상강의</span></span>
+        <span class="ml"><span>제작 서비스</span></span>
+      </h1>
+      <div class="chips">
+        <span class="chip on">#서비스</span>
+        <span class="chip">#콘텐츠</span>
+        <span class="chip">#경쟁력</span>
+      </div>
+    </div>
+
+    <p class="hero-lead">
+      강의 다시보기 서비스는<br>
+      강사 개인만의 <b>특별한 경쟁력</b> 그리고 <b>포트폴리오</b>가 된다!
+    </p>
+
+    <div class="hero-btns">
+      <a href="#pricing" class="btn btn-primary">비용 확인하기</a>
+      <a href="#process" class="btn btn-ghost">제작 과정 보기</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PROJECT ============ -->
+<section class="sec" id="project">
+  <div class="wrap">
+    <div class="pj-bracket rv">
+      <span class="en">PROJECT</span>
+      <p class="pj-lines">
+        강의 다시보기 시스템을 통해 <span class="hl">경쟁력 확보</span><br>
+        쌓인 강의들은 강사 개인의 <span class="hl">포트폴리오</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="pj-band">
+    <div class="wrap">
+      <div class="pj-grid">
+
+        <!-- 캡처 상단의 단원 라벨은 영상에 이미 박혀 있습니다.
+             화면에 안 보이는 글자라 alt 로 남깁니다(화면낭독기용). -->
+        <figure class="vid rv">
+          <img src="img/lecture-1.jpg" width="1100" height="619" loading="lazy" decoding="async"
+               alt="화학 반응의 규칙과 에너지 변화 · 01. 물질 변화와 화학 반응식 · B. 화학 반응과 화학 반응식 강의 화면">
+        </figure>
+
+        <!-- 가운데 칸에는 '원기T과학' 브랜드가 찍힌 캡처를 둔다.
+             세 장 중 브랜드가 보이는 건 이것뿐이라 시선이 가장 오래 머무는 자리에 놓았다. -->
+        <figure class="vid rv">
+          <img src="img/lecture-cell.jpg" width="1100" height="621" loading="lazy" decoding="async"
+               alt="시스템과 상호작용 · 21. 생명 시스템과 세포 · B. 세포의 구조와 기능 · 원기T과학 강의 화면">
+        </figure>
+
+        <figure class="vid rv">
+          <img src="img/lecture-3.jpg" width="1100" height="619" loading="lazy" decoding="async"
+               alt="생명시스템 · 03. 생명 시스템에서 정보의 흐름 · B. 유전정보의 흐름 강의 화면">
+        </figure>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 기대 효과 ============ -->
+<section class="sec sec-tint" id="effect">
+  <div class="wrap">
+    <div class="frame rv">
+      <div class="ef-grid">
+
+        <article class="ef-card rv">
+          <span class="ef-tag">#신뢰</span>
+          <h3>학부모 신뢰 증가</h3>
+          <p>체계적인 학습 서포트 시스템이<br>갖춰져 있다는 하나의 증거</p>
+          <div class="ef-arrow" aria-hidden="true"></div>
+          <div class="ef-out">재등록, 이탈 방지</div>
+        </article>
+
+        <article class="ef-card rv">
+          <span class="ef-tag">#효율</span>
+          <h3>보강 업무 효율화</h3>
+          <p>수업에 불참한 학생 관리와<br>동시에 망각 주기 공백 최소화</p>
+          <div class="ef-arrow" aria-hidden="true"></div>
+          <div class="ef-out">효율적인 관리</div>
+        </article>
+
+        <article class="ef-card rv">
+          <span class="ef-tag">#성과</span>
+          <h3>자기주도 학습 극대화</h3>
+          <p>자습시간에 활용 가능하며<br>자기주도 학습 능력 향상</p>
+          <div class="ef-arrow" aria-hidden="true"></div>
+          <div class="ef-out">성적 향상</div>
+        </article>
+
+      </div>
+      <div class="ef-bar rv">강사 개인, 학원 자체 경쟁력 강화</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREVIEW ============ -->
+<section class="sec" id="preview">
+  <div class="wrap">
+    <div class="pv-head rv">
+      <span class="pv-ghost" aria-hidden="true">PREVIEW</span>
+      <span class="en">PREVIEW</span>
+      <p class="sub">
+        학원 강사 개인의 자료로 <span class="hl">반영구적 사용</span> 가능하며<br>
+        다양한 방면으로 <span class="hl">재활용</span>됨
+      </p>
+    </div>
+
+    <div class="pv-grid">
+      <figure class="pv-item pv-a rv">
+        <div class="media" style="--ar:824/844">
+          <img src="img/preview-folders.jpg" width="824" height="844" loading="lazy" decoding="async"
+               alt="촬영 날짜별로 정리된 강의 영상 폴더 목록">
+        </div>
+        <figcaption class="pv-cap">개인별 하드디스크 영상 별도 보관</figcaption>
+      </figure>
+
+      <figure class="pv-item pv-b rv">
+        <div class="reels">
+          <div class="media" style="--ar:3/4">
+            <img src="img/reel-1.jpg" width="422" height="566" loading="lazy" decoding="async"
+                 alt="쇼츠: 횟집 가기 전 시청 필수, 원기T의 회 잘먹는 방법">
+          </div>
+          <div class="media" style="--ar:3/4">
+            <img src="img/reel-2.jpg" width="420" height="526" loading="lazy" decoding="async"
+                 alt="쇼츠: 진원진앙 마스터, 원기T의 양!">
+          </div>
+          <div class="media" style="--ar:3/4">
+            <img src="img/reel-3.jpg" width="424" height="562" loading="lazy" decoding="async"
+                 alt="쇼츠: 통합과학 마법사, 원기T 시그니처 주문">
+          </div>
+          <div class="media" style="--ar:3/4">
+            <img src="img/reel-4.jpg" width="422" height="562" loading="lazy" decoding="async"
+                 alt="쇼츠: 이런 샤갈! 소주 만드는 법">
+          </div>
+        </div>
+        <figcaption class="pv-cap">쇼츠, 릴스로 재활용</figcaption>
+      </figure>
+
+      <figure class="pv-item pv-c rv">
+        <div class="media" style="--ar:640/880">
+          <img src="img/preview-kakao.jpg" width="640" height="880" loading="lazy" decoding="async"
+               alt="수업 후 3시간 이내에 강의 영상이 올라온 학급 단체 채팅방">
+        </div>
+        <figcaption class="pv-cap">홍보 효과 발생</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark how">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="en en-sm">HOW?</span></div>
+    <div class="how-body rv">
+      <p>영상 제작하는 강사 <b>개인별 하드디스크</b>에<br>반영구적으로 보관하기 때문에 반영구적이며</p>
+      <p>강의에서 재미있는 부분은 <b>쇼츠 혹은 릴스로</b><br>재가공하여 배포 가능합니다.</p>
+      <p>또한 영상 강의를 제공한다는 점에서<br><b>긍정적인 홍보 효과</b>를 발생시킬 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="sec sec-tint" id="process">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="en en-sm">PROCESS</span>
+      <p class="sub">강사 개인별 영상 강의 제작 과정</p>
+    </div>
+
+    <div class="pc-list">
+
+      <div class="pc-step rv">
+        <div class="media slot-scrim">
+          <img src="img/step-1-schedule.jpg" width="1280" height="853" loading="lazy" decoding="async"
+               alt="달력에 강의 일정을 체크하는 모습">
+        </div>
+        <div class="pc-cap">
+          <span class="pc-n">STEP 01</span>
+          <div class="pc-t">강의 일정 확인</div>
+        </div>
+      </div>
+      <div class="pc-join" aria-hidden="true"></div>
+
+      <div class="pc-step rv">
+        <div class="media slot-scrim">
+          <img src="img/step-2-classroom.jpg" width="640" height="457" loading="lazy" decoding="async"
+               alt="수업 전 비어 있는 강의실">
+        </div>
+        <div class="pc-cap">
+          <span class="pc-n">STEP 02</span>
+          <div class="pc-t">강의장 현장 / 카메라 설치 장소 확인</div>
+        </div>
+      </div>
+      <div class="pc-join" aria-hidden="true"></div>
+
+      <div class="pc-step rv">
+        <div class="media slot-scrim">
+          <img src="img/step-3-camera.jpg" width="1280" height="853" loading="lazy" decoding="async"
+               alt="삼각대에 올린 캠코더">
+        </div>
+        <div class="pc-cap">
+          <span class="pc-n">STEP 03</span>
+          <div class="pc-t">강의 촬영</div>
+          <p class="pc-d">첫 촬영은 직접 촬영해드리지만<br><b>두 번째 촬영부터는 카메라 플레이 버튼만 눌러주시면 됩니다</b></p>
+        </div>
+      </div>
+      <div class="pc-join" aria-hidden="true"></div>
+
+      <div class="pc-step rv">
+        <div class="media slot-scrim">
+          <img src="img/step-4-editing.jpg" width="1280" height="854" loading="lazy" decoding="async"
+               alt="편집 프로그램 타임라인이 열린 노트북 화면">
+        </div>
+        <div class="pc-cap">
+          <span class="pc-n">STEP 04</span>
+          <div class="pc-t">편집</div>
+        </div>
+      </div>
+      <div class="pc-join" aria-hidden="true"></div>
+
+      <!-- 같은 단톡방 화면이지만 배너를 뺀 구간을 따로 잘라 썼다.
+           16:9 틀에 배너까지 넣으면 정작 영상 카드가 안 보인다. -->
+      <div class="pc-step rv">
+        <div class="media slot-scrim">
+          <img src="img/step-5-upload.jpg" width="640" height="690"
+               loading="lazy" decoding="async"
+               alt="강의 영상이 업로드된 학급 단체 채팅방 화면">
+        </div>
+        <div class="pc-cap">
+          <span class="pc-n">STEP 05</span>
+          <div class="pc-t">업로드</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="pc-foot rv">카카오톡방, 유튜브 등 개인이 원하는 방식으로 업로드 가능</p>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="en">PRICING</span>
+      <p class="sub">영상 업로드 일정은 협의 후에 결정됩니다</p>
+    </div>
+
+    <div class="pr-block rv">
+      <span class="pr-label">기본 비용</span>
+      <p class="pr-note">최소 제작비를 위해 10편 이하 또한 기본 비용으로 산정합니다.</p>
+
+      <div class="pr-grid">
+        <div class="pr-card"><div class="pr-k">장비대여</div><div class="pr-v">4만원</div></div>
+        <div class="pr-card"><div class="pr-k">편집비용</div><div class="pr-v">5만원</div></div>
+        <div class="pr-card"><div class="pr-k">업로드 비용</div><div class="pr-v">1만원</div></div>
+      </div>
+
+      <div class="pr-sum">
+        <span class="pr-sum-k">기본 비용 합계</span>
+        <span class="pr-sum-v">10만원</span>
+      </div>
+    </div>
+
+    <div class="pr-extra rv">
+      <p class="pr-extra-h">그 외</p>
+      <div class="pr-grid">
+        <div class="pr-card">
+          <div class="pr-k">릴스</div><div class="pr-v">1편당 1만원</div>
+        </div>
+        <div class="pr-card">
+          <div class="pr-k">하드</div><div class="pr-v">별도 없음</div>
+          <p class="pr-x">하드 양도 시 하드값 발생</p>
+        </div>
+        <div class="pr-card">
+          <div class="pr-k">수정</div><div class="pr-v">별도 없음</div>
+          <p class="pr-x">단, 릴스만 수정 가능<br>강의 영상은 수정 불가능</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Q&A ============ -->
+<section class="sec sec-tint" id="qa">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="en">Q&amp;A</span>
+      <p class="sub">궁금하실만한 사항들에 대해서 정리하였습니다.</p>
+    </div>
+
+    <div class="qa-list" id="qaList">
+      <!-- 답변은 각 항목의 .ph 자리에 넣으면 됩니다 -->
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">촬영을 직접 해주는 게 아닌가요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">일주일 내내 강의가 있어서 분량이 많아지면 비용이 올라가나요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">영상 퀄리티에 대해서는 어떻게 되나요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">유튜브로 업로드 하면 제 학생이 아닌 인원들에게도 보이는 건 아닌가요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">현금영수증 발행이 가능한가요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">인터넷 강의처럼 제작되는 건가요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">이게 정말 학원이나 강사 입장에서 도움이 될까요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+
+      <div class="qa rv">
+        <button class="qa-q" type="button" aria-expanded="false">
+          <span class="qa-mark">Q.</span>
+          <span class="qa-t">주에 10만원이라는 비용이 너무 비싼 게 아닌가요?</span>
+          <span class="qa-ic" aria-hidden="true"></span>
+        </button>
+        <div class="qa-a"><div class="qa-a-in"><span class="ph">답변을 넣어주세요</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 최종 CTA ============ -->
+<section class="sec sec-dark" id="contact">
+  <div class="wrap cta-box">
+    <h2 class="rv">촬영 일정부터<br>같이 잡아보시죠</h2>
+    <p class="sub rv">영상 업로드 일정은 협의 후에 결정됩니다.</p>
+
+    <div class="cta-lines rv">
+      <div class="cta-line"><span class="cta-k">담당</span><span class="cta-v ph-inline">[담당자 이름]</span></div>
+      <div class="cta-line"><span class="cta-k">연락처</span><span class="cta-v ph-inline">[전화번호]</span></div>
+      <div class="cta-line"><span class="cta-k">카카오톡</span><span class="cta-v ph-inline">[오픈채팅 또는 채널 링크]</span></div>
+    </div>
+
+    <div class="hero-btns rv" style="margin-top:clamp(26px,3.4vw,38px)">
+      <a href="#" class="btn btn-primary" data-contact>문의하기</a>
+      <a href="#pricing" class="btn btn-ghost">비용 다시 보기</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>학원 영상강의 제작 서비스</b><br>
+    표기된 금액은 기본 제작 기준이며, 촬영 편수·업로드 방식에 따라 협의 후 조정될 수 있습니다.
+  </div>
+</footer>
+
+<div class="dock">
+  <a href="#contact" class="btn btn-primary">문의하기</a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var REDUCE = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 표지: 폰트가 뜬 뒤 시작해야 서체가 바뀌며 덜컹거리지 않는다 ---------- */
+  var hero = document.querySelector('.hero');
+  function revealHero(){ if (hero) hero.classList.add('reveal'); }
+  if (REDUCE || !document.fonts) revealHero();
+  else Promise.race([document.fonts.ready, new Promise(function(r){ setTimeout(r, 900); })])
+              .then(revealHero);
+
+  /* ---------- 스크롤 등장 ----------
+     시차는 '같은 부모 안에서의 순번'으로 준다.
+     전역 DOM 순번을 쓰면 섹션 제목이 그 아래 카드보다 늦게 나타나는 역전이 생긴다. */
+  var rv = [].slice.call(document.querySelectorAll('.rv'));
+  if (REDUCE || !('IntersectionObserver' in window)){
+    rv.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var sibs = [].filter.call(el.parentElement.children, function(c){
+          return c.classList && c.classList.contains('rv');
+        });
+        el.style.transitionDelay = (Math.min(sibs.indexOf(el), 3) * 70) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold:.12, rootMargin:'0px 0px -50px 0px' });
+    rv.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- Q&A 아코디언 ----------
+     max-height 를 scrollHeight 로 잡아야 답변 길이가 달라져도 안 잘린다.
+     열려 있는 동안 창 크기가 바뀌면 줄바꿈이 늘어 높이가 모자라므로 다시 잰다. */
+  var openQa = [];
+  function setOpen(qa, open){
+    var btn = qa.querySelector('.qa-q');
+    var box = qa.querySelector('.qa-a');
+    var inner = qa.querySelector('.qa-a-in');
+    qa.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    box.style.maxHeight = open ? (inner.scrollHeight + 'px') : '0px';
+    var i = openQa.indexOf(qa);
+    if (open && i < 0) openQa.push(qa);
+    if (!open && i >= 0) openQa.splice(i, 1);
+  }
+  [].forEach.call(document.querySelectorAll('.qa'), function(qa){
+    qa.querySelector('.qa-q').addEventListener('click', function(){
+      setOpen(qa, !qa.classList.contains('open'));
+    });
+  });
+  addEventListener('resize', function(){
+    openQa.forEach(function(qa){
+      qa.querySelector('.qa-a').style.maxHeight =
+        qa.querySelector('.qa-a-in').scrollHeight + 'px';
+    });
+  });
+
+  /* ---------- 문의 링크 ----------
+     실제 주소가 정해지면 CONTACT_URL 한 줄만 바꾸면 됩니다. */
+  var CONTACT_URL = '';
+  if (CONTACT_URL){
+    [].forEach.call(document.querySelectorAll('[data-contact]'), function(a){
+      a.href = CONTACT_URL; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

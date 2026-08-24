@@ -1,0 +1,4 @@
+# 시안 검토용 페이지입니다. 검색엔진 수집을 막습니다.
+# 정식 공개할 때 이 파일을 지우고 index.html 의 robots 메타 태그도 지우세요.
+User-agent: *
+Disallow: /
