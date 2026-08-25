@@ -9,3 +9,6 @@ $RECYCLE.BIN/
 .vscode/
 .idea/
 *.swp
+
+# 가리기 전 원본. 저장소에 올라가면 가린 의미가 없다.
+img/_원본/
