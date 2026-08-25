@@ -323,6 +323,72 @@ img{max-width:100%; display:block;}
   box-shadow:var(--sh-lg);
 }
 
+/* ---------- 보강 대체 ----------
+   기대 효과의 '보강 업무 효율화' 한 장을 확대한 섹션이다.
+   내용이 본래 비교(지금 ↔ 영상)라서 두 칸으로 나눴다.
+
+   왼쪽은 단계가 쌓이고 오른쪽은 한 줄에서 끝난다.
+   오른쪽에 남는 빈 공간이 이 섹션의 논지다 — 비워둔 것이 곧 설명이다.
+   그래서 오른쪽 칸을 억지로 채우지 않았다.
+
+   번호를 붙인 이유: 여기는 실제로 순서가 있는 절차라서다.
+   순서가 정보를 담지 않는 목록에는 번호를 붙이지 않았다(후기·기대효과). */
+.cu-lead{max-width:660px; margin:16px auto 0;
+  font-size:clamp(14.5px,1.6vw,18px); line-height:1.85; color:var(--ink-2);}
+
+.cu-grid{display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(14px,2vw,24px); align-items:stretch;}
+.cu-panel{
+  display:flex; flex-direction:column;
+  border-radius:var(--r-md); padding:clamp(22px,3vw,34px);
+  min-height:clamp(250px,32vw,360px);
+}
+.cu-now{background:linear-gradient(155deg,#FFFFFF 0%,#F4F5F6 100%);
+  border:1px solid var(--line); box-shadow:var(--sh-md);}
+.cu-after{background:linear-gradient(160deg,#232429 0%,#0B0B0C 100%);
+  color:var(--paper); box-shadow:var(--sh-lg);}
+
+.cu-tag{font-size:11.5px; font-weight:800; letter-spacing:.18em; color:var(--ink-2);}
+.cu-after .cu-tag{color:#9DA1A8;}
+
+.cu-steps{margin-top:clamp(16px,2.2vw,24px); flex:1;}
+.cu-step{display:flex; gap:clamp(10px,1.4vw,15px); align-items:flex-start;}
+.cu-step + .cu-step{margin-top:clamp(12px,1.6vw,18px);}
+.cu-n{
+  flex:none; width:23px; height:23px; border-radius:50%;
+  display:grid; place-items:center; font-size:11px; font-weight:800;
+  border:1.5px solid var(--ink); color:var(--ink);
+}
+.cu-after .cu-n{border-color:var(--paper); color:var(--paper);}
+.cu-t{font-size:clamp(14px,1.5vw,16.5px); font-weight:700; line-height:1.5;}
+.cu-d{margin-top:4px; font-size:clamp(12.5px,1.3vw,14px); line-height:1.6; color:var(--ink-2);}
+.cu-after .cu-d{color:#B9BCC2;}
+
+.cu-loop{
+  margin-top:clamp(14px,1.8vw,20px); padding-top:clamp(12px,1.6vw,16px);
+  border-top:1px dashed var(--line-2);
+  font-size:clamp(12.5px,1.35vw,14.5px); font-weight:800; color:var(--red);
+}
+.cu-foot{
+  margin-top:clamp(18px,2.4vw,26px); padding-top:clamp(12px,1.6vw,16px);
+  border-top:1.5px solid var(--ink);
+  font-size:clamp(14px,1.7vw,18px); font-weight:800; letter-spacing:-.02em;
+}
+.cu-after .cu-foot{border-top-color:#3A3C42;}
+
+.cu-more{
+  margin-top:clamp(18px,2.4vw,28px);
+  border:1.8px solid var(--ink); border-radius:var(--r-md);
+  padding:clamp(18px,2.4vw,26px); text-align:center;
+}
+.cu-more-h{font-size:clamp(15px,1.8vw,19px); font-weight:800; letter-spacing:-.02em;}
+.cu-who{display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:14px;}
+.cu-who span{
+  font-size:clamp(12.5px,1.35vw,14.5px); font-weight:700;
+  padding:8px 16px; border-radius:var(--r-pill);
+  background:var(--paper-2); border:1px solid var(--line);
+}
+
 /* ---------- PREVIEW ---------- */
 .pv-head{position:relative; text-align:center; margin-bottom:clamp(32px,4.6vw,58px);}
 .pv-ghost{
@@ -574,6 +640,8 @@ img{max-width:100%; display:block;}
   .ef-grid > :nth-child(3), .pr-grid > :nth-child(3){grid-column:1 / -1;}
   .pr-note{padding-left:0;}
 
+
+
   /* 두 칸을 유지하기엔 단톡방 폭이 너무 좁아진다. 위아래로 쌓는다.
      릴스는 4장을 한 줄로 두면 한 칸이 80px 도 안 되므로 2×2 로 접는다. */
   .pv-grid{grid-template-columns:1fr;}
@@ -592,6 +660,12 @@ img{max-width:100%; display:block;}
      정작 카메라가 안 보였다. 4:3 으로 세워 글자 위에 사진 자리를 만든다. */
   .pc-step .media, .pc-step .slot{aspect-ratio:4/3;}
 
+  /* 여기서부터는 두 칸을 나란히 둘 폭이 안 나온다. 위아래로 쌓는다.
+     쌓아도 '긴 칸 / 짧은 칸' 대비는 그대로 남아 논지는 전달된다.
+     900px 에서 쪼개면 태블릿에서 비교가 너무 일찍 사라진다. */
+  .cu-grid{grid-template-columns:1fr;}
+  .cu-panel{min-height:0;}
+
   .qa-q{padding:16px 18px; gap:10px;}
   .qa-a-in{padding-left:18px; padding-right:18px;}
 }
@@ -605,6 +679,7 @@ img{max-width:100%; display:block;}
     <div class="nav-menu">
       <a href="#project">사례</a>
       <a href="#effect">기대 효과</a>
+      <a href="#catchup">보강</a>
       <a href="#preview">활용</a>
       <a href="#process">제작 과정</a>
       <a href="#pricing">비용</a>
@@ -713,6 +788,68 @@ img{max-width:100%; display:block;}
 
       </div>
       <div class="ef-bar rv">강사 개인, 학원 자체 경쟁력 강화</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 보강 대체 ============ -->
+<section class="sec" id="catchup">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="en en-sm">CATCH-UP</span>
+      <p class="sub">빠진 수업을, 다시 열지 않고 채웁니다</p>
+      <p class="cu-lead">
+        결석한 학생에게 필요한 건 그날의 수업입니다.
+        보강은 그 수업을 한 번 더 하는 일이고, 영상은 그날 것을 그대로 보내는 일입니다.
+      </p>
+    </div>
+
+    <div class="cu-grid">
+      <div class="cu-panel cu-now rv">
+        <span class="cu-tag">지금</span>
+        <div class="cu-steps">
+          <div class="cu-step">
+            <span class="cu-n">1</span>
+            <div><p class="cu-t">결석 학생이 생깁니다</p></div>
+          </div>
+          <div class="cu-step">
+            <span class="cu-n">2</span>
+            <div>
+              <p class="cu-t">보강 일정을 다시 잡습니다</p>
+              <p class="cu-d">학생·학부모와 시간을 맞춰야 합니다</p>
+            </div>
+          </div>
+          <div class="cu-step">
+            <span class="cu-n">3</span>
+            <div><p class="cu-t">같은 내용을 한 번 더 강의합니다</p></div>
+          </div>
+          <p class="cu-loop">결석자가 또 생기면 1번부터 다시</p>
+        </div>
+        <p class="cu-foot">같은 수업을 여러 번</p>
+      </div>
+
+      <div class="cu-panel cu-after rv">
+        <span class="cu-tag">영상이 있으면</span>
+        <div class="cu-steps">
+          <div class="cu-step">
+            <span class="cu-n">1</span>
+            <div>
+              <p class="cu-t">그날 찍은 영상을 보냅니다</p>
+              <p class="cu-d">몇 명이 결석했든 보내는 일은 한 번입니다</p>
+            </div>
+          </div>
+        </div>
+        <p class="cu-foot">추가 강의 0회</p>
+      </div>
+    </div>
+
+    <div class="cu-more rv">
+      <p class="cu-more-h">영상을 보는 건 결석한 학생만이 아닙니다</p>
+      <div class="cu-who">
+        <span>수업은 들었지만 놓친 학생</span>
+        <span>복습하는 학생</span>
+        <span>시험 기간에 돌아오는 학생</span>
+      </div>
     </div>
   </div>
 </section>
