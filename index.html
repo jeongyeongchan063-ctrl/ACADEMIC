@@ -509,9 +509,12 @@ img{max-width:100%; display:block;}
   font-size:clamp(27px,4.6vw,46px); font-weight:900;
   letter-spacing:-.04em; line-height:1;
 }
+/* 직함은 이름 옆에 붙는다. 밑줄 긋듯 baseline 을 맞춰야
+   따로 노는 글자가 아니라 이름의 꼬리로 읽힌다.
+   아래로 내렸을 때보다 조금 키웠다 — 46px 옆에서는 12.5px 이 묻힌다. */
 .card-name span{
-  display:block; margin-top:.42em;
-  font-size:clamp(10.5px,1.15vw,12.5px); font-weight:700;
+  display:inline-block; margin-left:.42em; vertical-align:baseline;
+  font-size:clamp(11px,1.3vw,14px); font-weight:700;
   letter-spacing:.16em; color:var(--ink-2);
 }
 .card-foot{border-top:1px solid var(--ink); padding-top:clamp(10px,1.4vw,15px);}
