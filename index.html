@@ -200,6 +200,13 @@ img{max-width:100%; display:block;}
   transition:transform var(--d-fast) var(--e-spring), background var(--d-fast) ease,
              box-shadow var(--d-fast) ease, color var(--d-fast) ease;
 }
+/* 누를 수 없는 버튼. 손가락 커서와 눌림 반응까지 빼야
+   눌러도 되는 것처럼 보이지 않는다.
+   .btn:hover 가 아래에 있어서 같은 특이도로는 덮인다. .btn 을 한 겹 더 붙인다. */
+.btn-static{cursor:default;}
+.btn.btn-static:hover, .btn.btn-static:active{transform:none;}
+.btn.btn-static.btn-primary:hover{background:var(--red);}
+
 .btn-primary{background:var(--red); color:#fff; box-shadow:var(--sh-red);}
 .btn-primary:hover{background:var(--red-d);}
 .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
@@ -1001,9 +1008,9 @@ img{max-width:100%; display:block;}
     </div>
 
     <div class="hero-btns rv" style="margin-top:clamp(26px,3.4vw,38px)">
-      <!-- 카카오톡 링크가 없는 동안에는 전화가 유일한 연락 수단이라
-           버튼이 아무 데도 안 가는 상태로 두지 않고 전화로 연결해 둔다. -->
-      <a href="tel:01058932573" class="btn btn-primary">전화 문의 010-5893-2573</a>
+      <!-- 누르면 아무 일도 일어나지 않는다. 번호를 보여주기만 한다.
+           그래서 a 가 아니라 span 이다 — 링크가 아닌 것은 링크로 두지 않는다. -->
+      <span class="btn btn-primary btn-static">전화 문의 010-5893-2573</span>
       <a href="#pricing" class="btn btn-ghost">비용 다시 보기</a>
     </div>
   </div>
